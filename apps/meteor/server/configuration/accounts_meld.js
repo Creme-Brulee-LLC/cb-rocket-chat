@@ -4,7 +4,7 @@ import _ from 'underscore';
 
 const orig_updateOrCreateUserFromExternalService = Accounts.updateOrCreateUserFromExternalService;
 
-const updateOrCreateUserFromExternalServiceAsync = async function (serviceName, serviceData = {}, ...args /* , options*/) {
+Accounts.updateOrCreateUserFromExternalService = async function (serviceName, serviceData = {}, ...args /* , options*/) {
 	const services = ['facebook', 'github', 'gitlab', 'google', 'meteor-developer', 'linkedin', 'twitter', 'apple'];
 
 	if (services.includes(serviceName) === false && serviceData._OAuthCustom !== true) {
@@ -44,9 +44,4 @@ const updateOrCreateUserFromExternalServiceAsync = async function (serviceName, 
 	}
 
 	return orig_updateOrCreateUserFromExternalService.apply(this, [serviceName, serviceData, ...args]);
-};
-
-Accounts.updateOrCreateUserFromExternalService = function (...args) {
-	// Depends on meteor support for Async
-	return Promise.await(updateOrCreateUserFromExternalServiceAsync.call(this, ...args));
 };
