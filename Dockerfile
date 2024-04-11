@@ -14,4 +14,5 @@ COPY . .
 RUN yarn
 RUN yarn build
 
+
 CMD ["yarn", "dsv"]
