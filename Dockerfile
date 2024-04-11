@@ -9,6 +9,8 @@ RUN groupadd -r rocketchat && \
 
 RUN curl https://install.meteor.com/ | sh
 
+RUN apt-get install -y libssl-dev
+
 WORKDIR /app
 
 COPY . .
