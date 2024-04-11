@@ -1,9 +1,7 @@
-FROM node:13
-
-RUN npm i -g meteor@2.15
+FROM node:14.21.3
 
 ENV NODE_ENV=production
-ENV RC_VERSION=6.6.6
+ENV RC_VERSION=6.7.0
 
 RUN groupadd -r rocketchat && \
     useradd -r -g rocketchat rocketchat && \
