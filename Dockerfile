@@ -7,12 +7,13 @@ RUN groupadd -r rocketchat && \
     useradd -r -g rocketchat rocketchat && \
     mkdir -p /app/uploads && chown rocketchat:rocketchat /app/uploads
 
+RUN curl https://install.meteor.com/ | sh
+
 WORKDIR /app
 
 COPY . .
 
 RUN yarn
 RUN yarn build
-
 
 CMD ["yarn", "dsv"]
