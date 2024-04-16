@@ -1,40 +1,27 @@
-FROM node:14.21.3-bullseye-slim
+FROM node:14.21.3
 
-LABEL maintainer="buildmaster@rocket.chat"
+ENV NODE_ENV=production
+ENV RC_VERSION=6.7.0
 
-# dependencies
-RUN groupadd -g 65533 -r rocketchat \
-    && useradd -u 65533 -r -g rocketchat rocketchat \
-    && mkdir -p /app/uploads \
-    && chown rocketchat:rocketchat /app/uploads \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends fontconfig
+RUN groupadd -r rocketchat && \
+    useradd -r -g rocketchat rocketchat && \
+    mkdir -p /app/uploads && chown rocketchat:rocketchat /app/uploads
 
-# --chown requires Docker 17.12 and works only on Linux
-ADD --chown=rocketchat:rocketchat . /app
+RUN curl https://install.meteor.com/ | sh
 
-RUN aptMark="$(apt-mark showmanual)" \
-    && apt-get install -y --no-install-recommends g++ make python3 ca-certificates \
-    && cd /app/bundle/programs/server \
-    && npm install \
-	&& cd npm/node_modules/isolated-vm \
-	&& npm install 
+RUN apt-get install -y libssl-dev
 
-USER rocketchat
+WORKDIR /app
 
-VOLUME /app/uploads
+COPY . .
 
-WORKDIR /app/bundle
+RUN ls -lsA
 
-# needs a mongoinstance - defaults to container linking with alias 'mongo'
-ENV DEPLOY_METHOD=docker \
-    NODE_ENV=production \
-    MONGO_URL=mongodb://mongo:27017/rocketchat \
-    HOME=/tmp \
-    PORT=3000 \
-    ROOT_URL=http://localhost:3000 \
-    Accounts_AvatarStorePath=/app/uploads
+RUN meteor build --server-only
 
-EXPOSE 3000
+RUN ls -lsA
 
-CMD ["node", "main.js"]
+# RUN yarn
+# RUN yarn build
+
+CMD ["yarn", "dsv"]
