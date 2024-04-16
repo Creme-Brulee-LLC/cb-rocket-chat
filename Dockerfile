@@ -17,7 +17,7 @@ COPY . .
 
 RUN ls -lsA
 
-RUN meteor build . --allow-superuser
+RUN cd ./apps/meteor && meteor build . --allow-superuser
 
 RUN ls -lsA
 
