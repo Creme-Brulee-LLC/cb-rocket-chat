@@ -15,13 +15,10 @@ WORKDIR /app
 
 COPY . .
 
+RUN yarn
+RUN yarn build:ci
+
 RUN ls -lsA
 
-RUN cd ./apps/meteor && meteor build . --allow-superuser
-
-RUN ls -lsA
-
-# RUN yarn
-# RUN yarn build
 
 CMD ["yarn", "dsv"]
