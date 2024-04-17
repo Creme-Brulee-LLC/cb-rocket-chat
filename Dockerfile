@@ -20,6 +20,8 @@ RUN yarn build
 
 WORKDIR /app/apps/meteor
 
+ENV METEOR_ALLOW_SUPERUSER=1
+
 RUN yarn
 RUN meteor build --directory ../output  
 
