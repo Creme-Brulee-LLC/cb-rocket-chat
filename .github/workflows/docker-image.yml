@@ -9,7 +9,7 @@ on:
 jobs:
 
   build:
-    runs-on: 8C
+    runs-on: own-compute
     env:
      YCR_REGISTRY_ID: ${{ vars.YCR_REGISTRY_ID }}
     steps:
