@@ -9,7 +9,7 @@ on:
 jobs:
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: 8C
     env:
      YCR_REGISTRY_ID: ${{ vars.YCR_REGISTRY_ID }}
     steps:
