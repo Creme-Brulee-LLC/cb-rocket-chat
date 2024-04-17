@@ -9,7 +9,7 @@ on:
 jobs:
 
   build:
-    runs-on: own-compute
+    runs-on: ubuntu-latest
     env:
      YCR_REGISTRY_ID: ${{ vars.YCR_REGISTRY_ID }}
     steps:
