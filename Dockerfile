@@ -16,9 +16,14 @@ WORKDIR /app
 COPY . .
 
 RUN yarn
-RUN yarn build:ci
+RUN yarn build
 
-RUN ls -lsA
+WORKDIR /app/apps/meteor
 
+RUN yarn
+RUN meteor build --directory ../output  
 
-CMD ["yarn", "dsv"]
+WORKDIR /app/apps/output/bundle
+RUN yarn add fibers
+
+CMD ["node", "main.js"]
