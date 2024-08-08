@@ -1,7 +1,7 @@
 FROM node:14.21.3
 
 ENV NODE_ENV=production
-ENV RC_VERSION=6.7.0
+ENV RC_VERSION=6.10.2
 
 RUN groupadd -r rocketchat && \
     useradd -r -g rocketchat rocketchat && \
