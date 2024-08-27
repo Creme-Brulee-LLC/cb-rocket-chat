@@ -18,7 +18,7 @@ let createIndexes = async () => {
 			// the collection should not exists yet, return empty then
 			return [];
 		})
-		.then(function (result) {
+		.then(function (result: any[]) {
 			return result.some(function (index) {
 				if (index.key && index.key._updatedAt === 1) {
 					if (index.expireAfterSeconds !== indexExpire) {
@@ -30,7 +30,7 @@ let createIndexes = async () => {
 				return false;
 			});
 		})
-		.then(function (created) {
+		.then(function (created: any) {
 			if (!created) {
 				InstanceStatusModel.col.createIndex({ _updatedAt: 1 }, { expireAfterSeconds: indexExpire });
 			}
