@@ -447,6 +447,21 @@ const GETRoomsNameExistsSchema = {
 
 export const isGETRoomsNameExists = ajv.compile<GETRoomsNameExists>(GETRoomsNameExistsSchema);
 
+type RoomsIsMemberProps = { roomId: string } & ({ username: string } | { userId: string });
+
+const RoomsIsMemberPropsSchema = {
+	type: 'object',
+	properties: {
+		roomId: { type: 'string', minLength: 1 },
+		userId: { type: 'string', minLength: 1 },
+		username: { type: 'string', minLength: 1 },
+	},
+	oneOf: [{ required: ['roomId', 'userId'] }, { required: ['roomId', 'username'] }],
+	additionalProperties: false,
+};
+
+export const isRoomsIsMemberProps = ajv.compile<RoomsIsMemberProps>(RoomsIsMemberPropsSchema);
+
 export type Notifications = {
 	disableNotifications: string;
 	muteGroupMentions: string;
@@ -527,6 +542,62 @@ const roomsImagesPropsSchema = {
 
 export const isRoomsImagesProps = ajv.compile<RoomsImagesProps>(roomsImagesPropsSchema);
 
+export type RoomsCleanHistoryProps = {
+	roomId: IRoom['_id'];
+	latest: string;
+	oldest: string;
+	inclusive?: boolean;
+	excludePinned?: boolean;
+	filesOnly?: boolean;
+	users?: IUser['username'][];
+	limit?: number;
+	ignoreDiscussion?: boolean;
+	ignoreThreads?: boolean;
+};
+
+const roomsCleanHistorySchema = {
+	type: 'object',
+	properties: {
+		roomId: {
+			type: 'string',
+		},
+		latest: {
+			type: 'string',
+		},
+		oldest: {
+			type: 'string',
+		},
+		inclusive: {
+			type: 'boolean',
+		},
+		excludePinned: {
+			type: 'boolean',
+		},
+		filesOnly: {
+			type: 'boolean',
+		},
+		users: {
+			type: 'array',
+			items: {
+				type: 'string',
+			},
+		},
+		limit: {
+			type: 'number',
+		},
+		ignoreDiscussion: {
+			type: 'boolean',
+		},
+		ignoreThreads: {
+			type: 'boolean',
+		},
+	},
+	required: ['roomId', 'latest', 'oldest'],
+	additionalProperties: false,
+};
+
+export const isRoomsCleanHistoryProps = ajv.compile<RoomsCleanHistoryProps>(roomsCleanHistorySchema);
+
 export type RoomsEndpoints = {
 	'/v1/rooms.autocomplete.channelAndPrivate': {
 		GET: (params: RoomsAutoCompleteChannelAndPrivateProps) => {
@@ -559,23 +630,12 @@ export type RoomsEndpoints = {
 	};
 
 	'/v1/rooms.cleanHistory': {
-		POST: (params: {
-			roomId: IRoom['_id'];
-			latest: string;
-			oldest: string;
-			inclusive?: boolean;
-			excludePinned?: boolean;
-			filesOnly?: boolean;
-			users?: IUser['username'][];
-			limit?: number;
-			ignoreDiscussion?: boolean;
-			ignoreThreads?: boolean;
-		}) => { _id: IRoom['_id']; count: number; success: boolean };
+		POST: (params: RoomsCleanHistoryProps) => { _id: IRoom['_id']; count: number; success: boolean };
 	};
 
 	'/v1/rooms.createDiscussion': {
 		POST: (params: RoomsCreateDiscussionProps) => {
-			discussion: IRoom;
+			discussion: IRoom & { rid: IRoom['_id'] };
 		};
 	};
 
@@ -683,6 +743,10 @@ export type RoomsEndpoints = {
 		GET: (params: RoomsGetDiscussionsProps) => PaginatedResult<{
 			discussions: IRoom[];
 		}>;
+	};
+
+	'/v1/rooms.isMember': {
+		GET: (params: RoomsIsMemberProps) => { isMember: boolean };
 	};
 
 	'/v1/rooms.muteUser': {

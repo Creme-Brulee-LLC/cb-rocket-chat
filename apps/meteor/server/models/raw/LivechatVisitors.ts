@@ -14,7 +14,10 @@ import type {
 	IndexDescription,
 	DeleteResult,
 	UpdateFilter,
+	ModifyResult,
+	FindOneAndUpdateOptions,
 } from 'mongodb';
+import { ObjectId } from 'mongodb';
 
 import { notifyOnSettingChanged } from '../../../app/lib/server/lib/notifyListener';
 import { BaseRaw } from './BaseRaw';
@@ -282,6 +285,22 @@ export class LivechatVisitorsRaw extends BaseRaw<ILivechatVisitor> implements IL
 		return this.updateOne({ _id }, update);
 	}
 
+	async updateOneByIdOrToken(
+		update: Partial<ILivechatVisitor>,
+		options?: FindOneAndUpdateOptions,
+	): Promise<ModifyResult<ILivechatVisitor>> {
+		let query: Filter<ILivechatVisitor> = {};
+
+		if (update._id) {
+			query = { _id: update._id };
+		} else if (update.token) {
+			query = { token: update.token };
+			update._id = new ObjectId().toHexString();
+		}
+
+		return this.findOneAndUpdate(query, { $set: update }, options);
+	}
+
 	saveGuestById(
 		_id: string,
 		data: { name?: string; username?: string; email?: string; phone?: string; livechatData: { [k: string]: any } },
@@ -439,6 +458,17 @@ export class LivechatVisitorsRaw extends BaseRaw<ILivechatVisitor> implements IL
 		return this.countDocuments({
 			activity: period,
 		});
+	}
+
+	setLastChatById(_id: string, lastChat: Required<ILivechatVisitor['lastChat']>): Promise<UpdateResult> {
+		return this.updateOne(
+			{ _id },
+			{
+				$set: {
+					lastChat,
+				},
+			},
+		);
 	}
 }
 

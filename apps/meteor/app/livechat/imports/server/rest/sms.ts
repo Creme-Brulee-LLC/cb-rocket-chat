@@ -73,8 +73,13 @@ const defineVisitor = async (smsNumber: string, targetDepartment?: string) => {
 		data.department = targetDepartment;
 	}
 
-	const id = await LivechatTyped.registerGuest(data);
-	return LivechatVisitors.findOneEnabledById(id);
+	const livechatVisitor = await LivechatTyped.registerGuest(data);
+
+	if (!livechatVisitor) {
+		throw new Meteor.Error('error-invalid-visitor', 'Invalid visitor');
+	}
+
+	return livechatVisitor;
 };
 
 const normalizeLocationSharing = (payload: ServiceData) => {
@@ -92,12 +97,18 @@ const normalizeLocationSharing = (payload: ServiceData) => {
 // @ts-expect-error - this is an special endpoint that requires the return to not be wrapped as regular returns
 API.v1.addRoute('livechat/sms-incoming/:service', {
 	async post() {
-		if (!(await OmnichannelIntegration.isConfiguredSmsService(this.urlParams.service))) {
+		const { service } = this.urlParams;
+		if (!(await OmnichannelIntegration.isConfiguredSmsService(service))) {
 			return API.v1.failure('Invalid service');
 		}
 
 		const smsDepartment = settings.get<string>('SMS_Default_Omnichannel_Department');
-		const SMSService = await OmnichannelIntegration.getSmsService(this.urlParams.service);
+		const SMSService = await OmnichannelIntegration.getSmsService(service);
+
+		if (!SMSService.validateRequest(this.request)) {
+			return API.v1.failure('Invalid request');
+		}
+
 		const sms = SMSService.parse(this.bodyParams);
 		const { department } = this.queryParams;
 		let targetDepartment = await defineDepartment(department || smsDepartment);
@@ -110,26 +121,25 @@ API.v1.addRoute('livechat/sms-incoming/:service', {
 			return API.v1.success(SMSService.error(new Error('Invalid visitor')));
 		}
 
-		const { token } = visitor;
-		const room = await LivechatRooms.findOneOpenByVisitorTokenAndDepartmentIdAndSource(token, targetDepartment, OmnichannelSourceType.SMS);
-		const roomExists = !!room;
-		const location = normalizeLocationSharing(sms);
-		const rid = room?._id || Random.id();
-
 		const roomInfo = {
 			sms: {
 				from: sms.to,
 			},
 			source: {
 				type: OmnichannelSourceType.SMS,
-				alias: this.urlParams.service,
+				alias: service,
 			},
 		};
 
-		// create an empty room first place, so attachments have a place to live
-		if (!roomExists) {
-			await LivechatTyped.getRoom(visitor, { rid, token, msg: '' }, roomInfo, undefined);
-		}
+		const { token } = visitor;
+		const room =
+			(await LivechatRooms.findOneOpenByVisitorTokenAndDepartmentIdAndSource(token, targetDepartment, OmnichannelSourceType.SMS)) ??
+			(await LivechatTyped.createRoom({
+				visitor,
+				roomInfo,
+			}));
+		const location = normalizeLocationSharing(sms);
+		const rid = room?._id;
 
 		let file: ILivechatMessage['file'];
 		const attachments: (MessageAttachment | undefined)[] = [];
