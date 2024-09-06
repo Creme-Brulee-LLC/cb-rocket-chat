@@ -106,7 +106,7 @@ export class LocalBroker implements IBroker {
 		// TODO models should not be called form here. we should create an abstraction to an internal service to perform this query
 		const instances = await InstanceStatus.find({}, { projection: { _id: 1 } }).toArray();
 
-		return instances.map(({ _id }) => ({ id: _id, available: true }));
+		return instances.map(({ _id }: { _id: string }) => ({ id: _id, available: true }));
 	}
 
 	async start(): Promise<void> {
