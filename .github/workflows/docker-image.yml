@@ -60,9 +60,9 @@ jobs:
         wg-quick up tunnel
         ssh -o StrictHostKeyChecking=no ${{ vars.CLIENT_DEPLOY_HOST }} bash <<EOF
           docker-credential-ycr configure-docker
-          docker pull cr.yandex/${{ vars.YCR_REGISTRY_ID }}/cb-rocket-chat:latest
-          docker ps -aq | xargs docker rm --force
-          docker images --filter "dangling=true" -q --no-trunc | xargs docker rmi
+          sudo docker pull cr.yandex/${{ vars.YCR_REGISTRY_ID }}/cb-rocket-chat:latest
+          sudo docker ps -aq | xargs sudo docker rm --force
+          sudo docker images --filter "dangling=true" -q --no-trunc | xargs sudo docker rmi
           sudo shutdown -r +1
           exit
         EOF
