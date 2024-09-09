@@ -26,7 +26,7 @@ WORKDIR /app/apps/meteor
 ENV METEOR_ALLOW_SUPERUSER=1
 
 RUN yarn
-RUN meteor build --directory ../output  
+RUN meteor build --platforms web.browser --directory ../output  
 
 WORKDIR /app/apps/output/bundle
 RUN yarn add fibers @meteorjs/reify
