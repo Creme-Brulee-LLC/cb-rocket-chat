@@ -1,0 +1,46 @@
+.rcx-content--main, .rcx-sidebar--main {
+  --rcx-color-surface-sidebar: #FFF8F5 !important;
+  --rcx-color-surface-selected: #FFEAE2 !important;
+  --rcx-color-font-default: #92838B!important;
+  --rcx-color-status-bullet-online: #1CBF89 !important;
+  --rcx-color-surface-hover: #FFEAE2 !important;
+  --rcx-color-badge-background-level-1: #6C727A !important;
+}
+
+.rcx-sidebar-topbar {
+  border-color: #EBE1E7 !important;
+}
+
+.rcx-message:hover {
+  background-color: #FFF8F5 !important;
+}
+
+.rcx-content--main {
+  --rcx-color-button-font-on-secondary: #1F2329 !important;
+  --rcx-color-surface-neutral: #FFEAE2 !important;
+  --rcx-color-stroke-light: #FFEAE2 !important;
+}
+.rcx-sidebar-item--highlighted, .rcx-sidebar-item__icon--highlighted {
+  color: #92838B !important;
+}
+.rcx-message-body {
+  color: #2F343D !important;
+}
+.rcx-message-header__name, .rcx-message-header__username {
+  color: #1F2329 !important;
+}
+.rcx-message-system__time {
+  color: #9EA2A8 !important;
+}
+.rcx-tag {
+  background-color: #E4E7EA !important;
+}
+.rcx-sidebar--divider {
+  border-color: #EBE1E7 !important;
+}
+.rcx-sidebar-topbar .rcx-button--icon {
+  color: #92838B !important;
+}
+.rcx-sidebar-title {
+  color: #9EA2A8 !important;
+}
