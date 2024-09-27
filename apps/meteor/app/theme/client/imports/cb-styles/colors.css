@@ -44,3 +44,20 @@
 .rcx-sidebar-title {
   color: #9EA2A8 !important;
 }
+.rcx-sidebar-item--selected {
+  background-color: #FDD1C1 !important;
+}
+.rcx-button--icon.hover, .rcx-button--icon.is-hovered, .rcx-button--icon:hover,
+.rcx-button-group--small .rcx-button-group__item:hover,
+.rcx-sidebar-topbar .rcx-button--icon:hover {
+  background-color: #FFEAE2 !important;
+  border-color: #FFEAE2 !important;
+}
+
+.rcx-icon--name-send, .rcx-icon--name-emoji {
+  color: #FEA383 !important;
+}
+.rcx-sidebar-topbar__wrapper .rcx-avatar + .rcx-box--full {
+  border-color: #FFFFFF !important;
+  background-color: none !important;
+}
