@@ -1,0 +1,9 @@
+.rcx-sidebar-footer {
+  display: none !important;
+}
+.rcx-sidebar-topbar .rcx-button-group__item:not(:nth-child(2)) {
+  display: none !important;
+}
+.omnichannel-sidebar {
+  display: none !important;
+}
