@@ -27,6 +27,5 @@
 @import '../../../node_modules/@rocket.chat/fuselage/dist/fuselage.css';
 
 /* CB Styles */
-
 @import 'imports/cb-styles/colors.css';
-/* @import 'imports/cb-styles/sidebar.css'; */
+@import 'imports/cb-styles/sidebar.css';
