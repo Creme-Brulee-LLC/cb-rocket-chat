@@ -61,3 +61,13 @@
   border-color: #FFFFFF !important;
   background-color: none !important;
 }
+
+.rcx-content--main {
+	--rcx-color-button-background-primary-default: #FFEAE2 !important;
+}
+.rcx-input-box__wrapper label + div + .rcx-box--full {
+  background: #FFF8F5 !important;
+}
+.rcx-input-box__wrapper {
+  background: none !important;
+}
