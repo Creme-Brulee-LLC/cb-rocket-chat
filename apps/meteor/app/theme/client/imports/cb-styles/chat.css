@@ -1,0 +1,34 @@
+.rcx-message-divider__wrapper .rcx-bubble__item.rcx-bubble__item--secondary {
+  background: none !important;
+}
+
+.rcx-message-divider__wrapper .rcx-bubble__item.rcx-bubble__item--secondary span {
+  font-size: 12px;
+  font-weight: 700;
+}
+.rcx-message-divider__wrapper .rcx-bubble__item.rcx-bubble__item--secondary {
+  background: none !important;
+}
+
+.rcx-message-divider__wrapper .rcx-bubble__item.rcx-bubble__item--secondary span {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.bubble-visible .rcx-bubble__item.rcx-bubble__item--secondary {
+  background: #FFFFFF !important;
+}
+.rcx-room-header button[data-qa-id]="ToolBoxAction-phone",
+.rcx-room-header button[data-qa-id]="ToolBoxAction-info-circled",
+.rcx-room-header button[data-qa-id]="ToolBoxAction-thread",
+.rcx-room-header button[data-qa-id]="ToolBoxAction-discussion" {
+  display: none !important;
+}
+
+header.rcx-room-header .rcx-button-group--align-start button:nth-child(-n+5), header.rcx-room-header .rcx-button-group--align-start hr {
+  display: none !important;
+}
+
+header.rcx-room-header h1, .messages-list li:first-child .rcx-box.rcx-box--full {
+  color: #1F2329 !important;
+}
