@@ -16,8 +16,8 @@
 }
 .rcx-box.rcx-box--full.rcx-attachment__details {
   background-color: #FFEAE2 !important;
-  border-top-right-radius: 4px !important;
-  border-bottom-right-radius: 4px !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
   border: 1px solid #FDD1C1 !important;
   border-left: 1px solid #9EA2A8 !important;
 }
@@ -37,4 +37,7 @@
 .rcx-message-block .rcx-button--small:hover {
   background-color: #FDD1C1 !important;
   border-color: #FDD1C1 !important;
+}
+.rcx-box.rcx-box--full.rcx-attachment__details .rcx-avatar + div + a {
+  text-decoration: none !important;
 }
