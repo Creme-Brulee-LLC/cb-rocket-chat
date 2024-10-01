@@ -1,0 +1,43 @@
+.rcx-input-box__wrapper .rcx-button-group[role="toolbar"] button:not(:first-child) {
+  display: none !important;
+}
+.rcx-content--main {
+	--rcx-color-button-background-primary-default: #FFEAE2 !important;
+}
+.rcx-input-box__wrapper label + div + .rcx-box--full {
+  background: #FFF8F5 !important;
+}
+.rcx-input-box__wrapper {
+  background: none !important;
+}
+
+.messages-list .rcx-message {
+  margin-left: 0;
+}
+.rcx-box.rcx-box--full.rcx-attachment__details {
+  background-color: #FFEAE2 !important;
+  border-top-right-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+  border: 1px solid #FDD1C1 !important;
+  border-left: 1px solid #9EA2A8 !important;
+}
+
+.rcx-box.rcx-box--full.rcx-attachment__details .rcx-avatar + .rcx-box {
+  color: #1F2329 !important;
+  font-weight: 700 !important;
+}
+
+.rcx-message-block .rcx-button--content {
+  color: #8E9392 !important;
+}
+.rcx-message-block .rcx-button--small {
+  background: none !important;
+  border: none !important;
+}
+.rcx-message-block .rcx-button--small:hover {
+  background-color: #FDD1C1 !important;
+  border-color: #FDD1C1 !important;
+}
+.rcx-box.rcx-box--full.rcx-attachment__details .rcx-avatar + div + a {
+  text-decoration: none !important;
+}
