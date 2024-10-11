@@ -41,3 +41,6 @@
 .rcx-box.rcx-box--full.rcx-attachment__details .rcx-avatar + div + a {
   text-decoration: none !important;
 }
+
+.messages-list li:first-child { display: none !important; }
+div[data-system-message-type] { display: none !important; }
