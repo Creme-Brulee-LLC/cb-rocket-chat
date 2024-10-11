@@ -1,3 +1,7 @@
 .rcx-input-box__wrapper .rcx-button-group[role="toolbar"] button:not(:first-child) {
   display: none !important;
 }
+
+.rcx-input-box__wrapper .rcx-button-group[role="toolbar"] hr {
+  display: none !important;
+}
