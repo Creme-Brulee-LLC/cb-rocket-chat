@@ -32,3 +32,7 @@ header.rcx-room-header .rcx-button-group--align-start button:nth-child(-n+5), he
 header.rcx-room-header h1, .messages-list li:first-child .rcx-box.rcx-box--full {
   color: #1F2329 !important;
 }
+
+.rcx-avatar__element {
+  border-radius: 0.5rem !important;
+}
