@@ -9,25 +9,18 @@ RUN groupadd -r rocketchat && \
     useradd -r -g rocketchat rocketchat && \
     mkdir -p /app/uploads && chown rocketchat:rocketchat /app/uploads && \
     apt-get update && \
-    apt-get install -y --no-install-recommends g++ make python3 ca-certificates libssl-dev curl && \
+    apt-get install -y --no-install-recommends ca-certificates curl g++ libssl-dev make python3 && \
     curl https://install.meteor.com/\?release\=${METEOR_VERSION} | sh && \
     curl -fsSL https://deno.land/install.sh | sh && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN curl https://install.meteor.com/ | sh
-
-RUN apt-get install -y libssl-dev
-
 WORKDIR /app
 
 COPY . .
 
-# Install dependencies
-RUN yarn
-
-# Build the app
-RUN yarn build
+# Install dependencies and build the app
+RUN yarn && yarn build
 
 WORKDIR /app/apps/meteor
 
