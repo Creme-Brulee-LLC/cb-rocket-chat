@@ -12,6 +12,8 @@ RUN groupadd -r rocketchat && \
     apt-get install -y --no-install-recommends ca-certificates curl g++ libssl-dev make python3 && \
     curl https://install.meteor.com/\?release\=${METEOR_VERSION} | sh && \
     curl -fsSL https://deno.land/install.sh | sh && \
+    echo 'export PATH="/root/.deno/bin:$PATH"' >> /root/.bashrc && \
+    export PATH="/root/.deno/bin:$PATH" && \    
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
