@@ -16,7 +16,6 @@
 @import url('imports/general/theme_old.css');
 @import url('./vendor/fontello/css/fontello.css');
 @import url('./rocketchat.font.css');
-@import url('./mentionLink.css');
 @import url('../../../node_modules/@rocket.chat/fuselage/dist/fuselage.css');
 /* CB Styles */
 @import url('imports/cb-styles/colors.css');
