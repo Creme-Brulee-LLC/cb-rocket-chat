@@ -19,7 +19,7 @@ WORKDIR /app
 
 COPY . .
 
-ENV PATH="/root/.deno/bin/deno:$PATH"
+ENV PATH="/root/.deno/bin:$PATH"
 # Install dependencies and build the app
 RUN yarn && yarn build
 
