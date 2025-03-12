@@ -59,6 +59,7 @@ export type StoreState = {
 			hideWatermark?: boolean;
 			livechatLogo?: { url: string };
 			transcript?: boolean;
+			visitorsCanCloseChat?: boolean;
 		};
 		online?: boolean;
 		departments: Department[];
@@ -176,7 +177,7 @@ const dontPersist = [
 	'incomingCallAlert',
 	'ongoingCall',
 	'parentUrl',
-];
+] as Array<keyof StoreState>;
 
 export const store = new Store(initialState(), { dontPersist });
 
