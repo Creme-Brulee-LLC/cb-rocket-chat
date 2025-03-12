@@ -14,12 +14,12 @@ RUN groupadd -r rocketchat && \
     curl -fsSL https://deno.land/install.sh | sh && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-ENV PATH="/root/.deno/bin/deno:$PATH"
 
 WORKDIR /app
 
 COPY . .
 
+ENV PATH="/root/.deno/bin/deno:$PATH"
 # Install dependencies and build the app
 RUN yarn && yarn build
 
