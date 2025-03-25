@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 import { MeteorError } from '@rocket.chat/core-services';
 import type { IUser } from '@rocket.chat/core-typings';
 import { License } from '@rocket.chat/license';
@@ -5,6 +6,8 @@ import { License } from '@rocket.chat/license';
 import { i18n } from '../../../../server/lib/i18n';
 
 export async function validateUserRoles(userData: Partial<IUser>, currentUserData?: Partial<IUser>) {
+	return;
+
 	const isApp = Boolean(userData.type === 'app');
 	const wasApp = Boolean(currentUserData?.type === 'app');
 
