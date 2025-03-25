@@ -299,7 +299,7 @@ export const createGeneralSettings = () =>
 			});
 		});
 		await this.section('REST API', async function () {
-			return this.add('API_User_Limit', 500, {
+			return this.add('API_User_Limit', 1000000, {
 				type: 'int',
 				public: true,
 				i18nDescription: 'API_User_Limit',

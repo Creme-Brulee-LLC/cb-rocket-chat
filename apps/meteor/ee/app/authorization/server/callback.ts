@@ -1,9 +1,9 @@
-import { MeteorError } from '@rocket.chat/core-services';
+// import { MeteorError } from '@rocket.chat/core-services';
 import { License } from '@rocket.chat/license';
 
 import { validateUserRoles } from './validateUserRoles';
 import { callbacks } from '../../../../lib/callbacks';
-import { i18n } from '../../../../server/lib/i18n';
+// import { i18n } from '../../../../server/lib/i18n';
 
 License.onInstall(() => {
 	callbacks.add(
@@ -15,7 +15,7 @@ License.onInstall(() => {
 	callbacks.add(
 		'afterSaveUser',
 		async (user) => {
-			await License.shouldPreventAction('activeUsers');
+			// await License.shouldPreventAction('activeUsers');
 
 			return user;
 		},
@@ -25,7 +25,7 @@ License.onInstall(() => {
 	callbacks.add(
 		'afterDeleteUser',
 		async (user) => {
-			await License.shouldPreventAction('activeUsers');
+			// await License.shouldPreventAction('activeUsers');
 
 			return user;
 		},
@@ -36,7 +36,7 @@ License.onInstall(() => {
 	callbacks.add(
 		'afterDeactivateUser',
 		async (user) => {
-			await License.shouldPreventAction('activeUsers');
+			// await License.shouldPreventAction('activeUsers');
 			return user;
 		},
 		callbacks.priority.HIGH,
@@ -46,9 +46,9 @@ License.onInstall(() => {
 	callbacks.add(
 		'beforeActivateUser',
 		async () => {
-			if (await License.shouldPreventAction('activeUsers')) {
-				throw new MeteorError('error-license-user-limit-reached', i18n.t('error-license-user-limit-reached'));
-			}
+			// if (await License.shouldPreventAction('activeUsers')) {
+			// 	throw new MeteorError('error-license-user-limit-reached', i18n.t('error-license-user-limit-reached'));
+			// }
 			return undefined;
 		},
 		callbacks.priority.HIGH,
